@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap");
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: "Sofia Sans", sans-serif;
+}
+body {
+  height: 100vh;
+  font-size: 1rem;
+  background-color: #2e282a;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.container-add-list {
+  background-color: #2e1760;
+  display: flex;
+  justify-content: space-between;
+  width: 550px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+}
+#text-list {
+  padding: 12px;
+  width: 400px;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
+  outline: none;
+  background-color: #dff3e4;
+  color: #2e282a;
+}
+#text-list::placeholder {
+  color: #2e282a;
+}
+.button-add {
+  padding: 12px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #dff3e4;
+  background-color: #76b041;
+}
+.container-itens-list {
+  background-color: #2e1760;
+  width: 550px;
+  border-radius: 12px;
+  padding: 20px;
+}
+.container-itens-list h1 {
+  color: #dff3e4;
+}
+.header-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-size: 1rem;
+  border-bottom: 1px solid #dff3e4;
+  margin-bottom: 20px;
+}
+.button-limpar {
+  padding: 12px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #dff3e4;
+  background-color: #e4572e;
+}
+.resultado {
+  padding: 20px;
+  border-radius: 12px;
+}
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #dff3e4;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  color: #2e282a;
+}
+.button-remove {
+  height: 20px;
+  width: 20px;
+  background-color: #e4572e;
+  color: #2e282a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.resolved-item {
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.container-buttons {
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  #text-list {
+    width: 250px;
+  }
+  .container-itens-list, .container-add-list {
+    max-width: 350px;
+  }
+  .container-itens-list {
+    padding: 10px;
+  }
+}

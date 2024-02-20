@@ -9,29 +9,42 @@ function adicionarItemDaLista(event) {
   const inputValue = inputText.value;
   if (inputValue !== "") {
     const novoLi = criarLi(inputValue);
-    const novaDiv = criarDiv();
-    novoLi.appendChild(novaDiv)
+    const novaDiv = criarDiv(novoLi);
+    novoLi.appendChild(novaDiv);
     ul.appendChild(novoLi);
+    removerLi(novoLi);
+    inputText.value = "";
   } else {
     alert("Insira um texto");
   }
 }
 
-function criarDiv() {
+function criarDiv(li) {
   const div = document.createElement("div");
+  const button = document.createElement("button");
+  const inputCheckBox = document.createElement("input");
+
   div.classList.add("container-buttons");
 
-  const inputCheckBox = document.createElement("input");
   inputCheckBox.setAttribute("type", "checkbox");
   inputCheckBox.classList.add("resolved-item");
 
-  const button = document.createElement("button");
   button.classList.add("button-remove");
-  button.innerText = "X";
+  button.innerText = "x";
 
   div.appendChild(inputCheckBox);
   div.appendChild(button);
+
+  button.addEventListener("click", (event) => {
+    removerLi(li, event);
+  });
   return div;
+}
+
+function removerLi(li, event) {
+  if (event.target) {
+    li.remove();
+  }
 }
 
 function criarLi(text) {

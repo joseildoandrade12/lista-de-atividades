@@ -10,6 +10,7 @@ body {
   height: 100vh;
   font-size: 1rem;
   background-color: #2e282a;
+  position: relative;
 }
 .container {
   height: 100%;
@@ -116,12 +117,78 @@ li {
   justify-content: space-between;
   align-items: center;
 }
+.modal-container {
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.modal-container.ativo {
+  display: flex;
+}
+.modal-verification {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2e1760;
+  height: 200px;
+  width: 350px;
+  border: 5px solid #dff3e4;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+.modal-container h1 {
+  font-size: 1.25rem;
+  margin: 20px 10px 40px 10px;
+  color: #dff3e4d3;
+}
+.buttons-verification .button-verification {
+  width: 70px;
+  height: 40px;
+  margin: 0px 20px;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.button-yes {
+  background-color: #76b041;
+  color: #dff3e4;
+}
+.button-no {
+  background-color: #e4572e;
+  color: #dff3e4;
+}
+.button-fechar {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 5px solid #dff3e4;
+  background-color: #2e1760;
+  color: #dff3e4;
+  cursor: pointer;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+}
 
 @media (max-width: 600px) {
   #text-list {
     width: 250px;
   }
-  .container-itens-list, .container-add-list {
+  .container-itens-list,
+  .container-add-list {
     max-width: 350px;
   }
   .container-itens-list {

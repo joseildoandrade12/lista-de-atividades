@@ -12,7 +12,6 @@ function adicionarItemDaLista(event) {
     const novaDiv = criarDiv(novoLi);
     novoLi.appendChild(novaDiv);
     ul.appendChild(novoLi);
-    removerLi(novoLi);
     inputText.value = "";
   } else {
     alert("Insira um texto");
@@ -52,3 +51,40 @@ function criarLi(text) {
   li.innerText = text;
   return li;
 }
+
+const containerModal = document.querySelector(".modal-container");
+const buttonFechar = document.querySelector(".button-fechar");
+const buttonLimpar = document.querySelector(".button-limpar");
+const buttonNo = document.querySelector(".button-no");
+const buttonYes = document.querySelector(".button-yes");
+const botoesModal = [buttonFechar, buttonLimpar, buttonNo];
+
+function toggleModal(event) {
+  event.preventDefault();
+  containerModal.classList.toggle("ativo");
+}
+
+function fecharModal(event) {
+  if (event.target === this) {
+    toggleModal(event);
+  }
+}
+
+function removerTodosLi() {
+  const itens = document.querySelectorAll("li");
+  console.log(itens);
+  if (itens.length !== 0) {
+    itens.forEach((li) => {
+      li.remove();
+      containerModal.classList.remove("ativo");
+    });
+  } else {
+    alert("Não tem itens na lista");
+  }
+}
+
+containerModal.addEventListener("click", fecharModal);
+buttonYes.addEventListener("click", removerTodosLi);
+botoesModal.forEach((button) => {
+  button.addEventListener("click", toggleModal);
+});

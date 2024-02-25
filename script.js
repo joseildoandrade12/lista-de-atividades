@@ -23,13 +23,21 @@ function criarDiv(li) {
   const button = document.createElement("button");
   const inputCheckBox = document.createElement("input");
 
+  inputCheckBox.addEventListener("change", valorInput);
+  function valorInput() {
+    const textLi = li.querySelector("p").innerText;
+    const valueInput = inputCheckBox.checked;
+    saveValues(textLi, valueInput);
+  }
+  valorInput();
+
   div.classList.add("container-buttons");
 
   inputCheckBox.setAttribute("type", "checkbox");
-  inputCheckBox.classList.add("resolved-item");
+  inputCheckBox.classList.add("input-item");
 
   button.classList.add("button-remove");
-  button.innerText = "x";
+  button.innerText = "X";
 
   div.appendChild(inputCheckBox);
   div.appendChild(button);
@@ -37,18 +45,21 @@ function criarDiv(li) {
   button.addEventListener("click", (event) => {
     removerLi(li, event);
   });
+
   return div;
 }
 
 function removerLi(li, event) {
   if (event.target) {
+    const paragrafoLi = document.querySelector("li p");
+    localStorage.removeItem(paragrafoLi.innerText);
     li.remove();
   }
 }
 
 function criarLi(text) {
   const li = document.createElement("li");
-  li.innerText = text;
+  li.innerHTML = `<p>${text}</p>`;
   return li;
 }
 
@@ -77,6 +88,7 @@ function removerTodosLi() {
     itens.forEach((li) => {
       li.remove();
       containerModal.classList.remove("ativo");
+      localStorage.clear();
     });
   } else {
     alert("Não tem itens na lista");
@@ -88,3 +100,21 @@ buttonYes.addEventListener("click", removerTodosLi);
 botoesModal.forEach((button) => {
   button.addEventListener("click", toggleModal);
 });
+
+function saveValues(textLi, valueInput) {
+  localStorage[textLi] = valueInput;
+}
+
+function setValues() {
+  const valoresLi = Object.keys(localStorage);
+  valoresLi.forEach((liValue) => {
+    const novoLi = criarLi(liValue);
+    const novaDiv = criarDiv(novoLi);
+    const valueInput = localStorage.getItem(liValue) === true;
+    console.log(valueInput);
+    novaDiv.querySelector(".input-item").checked = valueInput;
+    novoLi.appendChild(novaDiv);
+    ul.appendChild(novoLi);
+  });
+}
+setValues();

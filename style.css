@@ -12,6 +12,18 @@ body {
   background-color: #2e282a;
   position: relative;
 }
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: #2e282a;
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #2e282a;
+  border-radius: 10px;
+  border: 1px solid #dff3e4;
+}
 .container {
   height: 100%;
   display: flex;
@@ -82,7 +94,21 @@ body {
 }
 .resultado {
   padding: 20px;
+  height: 300px;
+  overflow-y: scroll;
   border-radius: 12px;
+}
+.resultado::-webkit-scrollbar {
+  width: 8px;
+}
+.resultado::-webkit-scrollbar-track {
+  background: #dff3e4;
+  border-radius: 10px;
+}
+.resultado::-webkit-scrollbar-thumb {
+  background-color: #2e1760;
+  border-radius: 10px;
+  border: 1px solid #dff3e4;
 }
 li {
   display: flex;
@@ -119,7 +145,8 @@ li {
   cursor: pointer;
   font-weight: bold;
 }
-.modal-container, .concluded-container {
+.modal-container,
+.concluded-container {
   height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -131,7 +158,8 @@ li {
   justify-content: center;
   align-items: center;
 }
-.modal-container.ativo, .concluded-container.ativo {
+.modal-container.ativo,
+.concluded-container.ativo {
   display: flex;
 }
 .modal-verification {

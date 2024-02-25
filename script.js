@@ -1,8 +1,22 @@
 const inputText = document.querySelector("#text-list");
 const buttonAdd = document.querySelector(".button-add");
 const ul = document.querySelector(".itens-li");
+const containerModal = document.querySelector(".modal-container");
+const buttonFechar = document.querySelector(".button-fechar");
+const buttonLimpar = document.querySelector(".button-limpar");
+const buttonNo = document.querySelector(".button-no");
+const buttonYes = document.querySelector(".button-yes");
+const modalConcluded = document.querySelector(".concluded-container");
 
+modalConcluded.addEventListener('click', removerModal)
 buttonAdd.addEventListener("click", adicionarItemDaLista);
+containerModal.addEventListener("click", fecharModal);
+buttonYes.addEventListener("click", removerTodosLi);
+
+const botoesModal = [buttonFechar, buttonLimpar, buttonNo];
+botoesModal.forEach((button) => {
+  button.addEventListener("click", toggleModal);
+});
 
 function adicionarItemDaLista(event) {
   event.preventDefault();
@@ -12,7 +26,9 @@ function adicionarItemDaLista(event) {
     const novaDiv = criarDiv(novoLi);
     novoLi.appendChild(novaDiv);
     ul.appendChild(novoLi);
+    saveValues(inputValue);
     inputText.value = "";
+    inputText.focus();
   } else {
     alert("Insira um texto");
   }
@@ -20,32 +36,26 @@ function adicionarItemDaLista(event) {
 
 function criarDiv(li) {
   const div = document.createElement("div");
-  const button = document.createElement("button");
-  const inputCheckBox = document.createElement("input");
-
-  inputCheckBox.addEventListener("change", valorInput);
-  function valorInput() {
-    const textLi = li.querySelector("p").innerText;
-    const valueInput = inputCheckBox.checked;
-    saveValues(textLi, valueInput);
-  }
-  valorInput();
+  const buttonExcluir = document.createElement("button");
+  const buttonResolved = document.createElement("button");
 
   div.classList.add("container-buttons");
 
-  inputCheckBox.setAttribute("type", "checkbox");
-  inputCheckBox.classList.add("input-item");
+  buttonResolved.classList.add("button-resolved");
+  buttonResolved.innerText = "✓";
 
-  button.classList.add("button-remove");
-  button.innerText = "X";
+  buttonExcluir.classList.add("button-remove");
+  buttonExcluir.innerText = "✗";
 
-  div.appendChild(inputCheckBox);
-  div.appendChild(button);
+  div.appendChild(buttonResolved);
+  div.appendChild(buttonExcluir);
 
-  button.addEventListener("click", (event) => {
+  buttonExcluir.addEventListener("click", (event) => {
     removerLi(li, event);
   });
-
+  buttonResolved.addEventListener("click", (event) => {
+    concludedTask(event);
+  });
   return div;
 }
 
@@ -57,18 +67,22 @@ function removerLi(li, event) {
   }
 }
 
+function concludedTask(event) {
+  event.preventDefault();
+  modalConcluded.classList.add("ativo");
+}
+
+function removerModal(event) {
+  if (event.target === this) {
+    modalConcluded.classList.remove('ativo')
+  }
+}
+
 function criarLi(text) {
   const li = document.createElement("li");
   li.innerHTML = `<p>${text}</p>`;
   return li;
 }
-
-const containerModal = document.querySelector(".modal-container");
-const buttonFechar = document.querySelector(".button-fechar");
-const buttonLimpar = document.querySelector(".button-limpar");
-const buttonNo = document.querySelector(".button-no");
-const buttonYes = document.querySelector(".button-yes");
-const botoesModal = [buttonFechar, buttonLimpar, buttonNo];
 
 function toggleModal(event) {
   event.preventDefault();
@@ -95,14 +109,8 @@ function removerTodosLi() {
   }
 }
 
-containerModal.addEventListener("click", fecharModal);
-buttonYes.addEventListener("click", removerTodosLi);
-botoesModal.forEach((button) => {
-  button.addEventListener("click", toggleModal);
-});
-
-function saveValues(textLi, valueInput) {
-  localStorage[textLi] = valueInput;
+function saveValues(textLi) {
+  localStorage[textLi] = textLi;
 }
 
 function setValues() {
@@ -110,9 +118,6 @@ function setValues() {
   valoresLi.forEach((liValue) => {
     const novoLi = criarLi(liValue);
     const novaDiv = criarDiv(novoLi);
-    const valueInput = localStorage.getItem(liValue) === true;
-    console.log(valueInput);
-    novaDiv.querySelector(".input-item").checked = valueInput;
     novoLi.appendChild(novaDiv);
     ul.appendChild(novoLi);
   });
